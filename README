@@ -1,1 +1,9 @@
-Minecart Mania 2.0 by jrbudda
+Minecart Mania 2.1.3 beta 1 by Araamarmorth
+
+This is a light modification of Minecart Mania by jrbudda : 
+https://github.com/jrbudda/MinecartMania (plugin available on 
+http://dev.bukkit.org/bukkit-mods/minecartmania-reborn/)
+
+To build the plugin you need to setup maven (http://maven.apache.org/)
+On Windows use compile.bat
+On Unix use make

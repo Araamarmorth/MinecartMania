@@ -1,0 +1,1 @@
+mvn -U clean package && copy /Y "target\minecartmaniacore-2.1.3 beta 1.jar" MinecartMania.jar && pause
