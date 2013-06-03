@@ -8,32 +8,26 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import net.minecraft.server.v1_4_R1.EntityMinecart;
-
-import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Chest;
 import org.bukkit.block.Dispenser;
 import org.bukkit.block.Furnace;
-import org.bukkit.craftbukkit.v1_4_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_4_R1.entity.CraftMinecart;
-import org.bukkit.craftbukkit.v1_4_R1.entity.CraftPoweredMinecart;
-import org.bukkit.craftbukkit.v1_4_R1.entity.CraftStorageMinecart;
-import org.bukkit.craftbukkit.v1_4_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_5_R3.inventory.CraftItemStack;
 import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;
-import org.bukkit.entity.PoweredMinecart;
-import org.bukkit.entity.StorageMinecart;
+import org.bukkit.entity.minecart.PoweredMinecart;
+import org.bukkit.entity.minecart.StorageMinecart;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.Button;
 import org.bukkit.material.Lever;
 import org.bukkit.material.MaterialData;
 
-import com.afforess.minecartmania.MMMinecart;
 import com.afforess.minecartmania.debug.DebugTimer;
 import com.afforess.minecartmania.debug.Logger;
+import com.afforess.minecartmania.minecarts.MMMinecart;
+import com.afforess.minecartmania.minecarts.MMStorageCart;
 import com.afforess.minecartmania.utils.ThreadSafe;
 
 //TODO: get rid of this whole class.
@@ -45,6 +39,8 @@ public class MinecartManiaWorld {
 	private static ConcurrentHashMap<Location,MinecartManiaFurnace> furnaces = new ConcurrentHashMap<Location,MinecartManiaFurnace>();
 	private static ConcurrentHashMap<String,MinecartManiaPlayer> players = new ConcurrentHashMap<String,MinecartManiaPlayer>();
 
+	public static Set<Integer> replacedIDs = new HashSet<Integer>();
+	
 	private static int counter = 0;
 	private static Lock pruneLock = new ReentrantLock();
 
@@ -62,16 +58,19 @@ public class MinecartManiaWorld {
 		prune();
 		final int id = minecart.getEntityId();
 		MMMinecart testMinecart = minecarts.get(id);
+		
 		if (testMinecart == null) {
 			Logger.debug("No MM minecart found for id " + id);
 			synchronized(minecart) {
+				
 				//may have been created while waiting for the lock
 				if (minecarts.get(id) != null) {
 					return minecarts.get(id);
 				}
-				//Special handling because bukkit fails at creating the right type of minecart entity
 
+				//Special handling because bukkit fails at creating the right type of minecart entity
 				if(replacedIDs.contains(id)){
+					Logger.debug("Duplication requested for " + id);
 					//special case got call for minecart we already replaced, happens when multiple events are queued for the vanilla cart.
 					for (Entry<Integer, MMMinecart> ent : minecarts.entrySet()) {
 						if(ent.getValue().oldID() == id){
@@ -79,7 +78,6 @@ public class MinecartManiaWorld {
 						}
 					}
 					Logger.debug("Minecart " + id + " listed as replaced but no entity found!!");
-					return null;
 				}
 
 
@@ -95,19 +93,23 @@ public class MinecartManiaWorld {
 					CraftPoweredMinecart csm = new CraftPoweredMinecart(server, em); 
 					minecart = (Minecart)csm;
 				}
-				//End workaround
+				
+
 				MMMinecart newCart;
+				
 				if (minecart instanceof StorageMinecart) {
-					newCart = new MinecartManiaStorageCart(minecart);
+					newCart = new MMStorageCart(minecart);
 				}
 				else {
 					newCart = new MMMinecart(minecart);
 				}
+				
 				minecarts.put(newCart.getEntityId(), newCart);
 				replacedIDs.add(id);
 				return newCart;
 			}
 		}
+		
 		return testMinecart;
 	}
 
@@ -603,7 +605,7 @@ public class MinecartManiaWorld {
 		}
 
 		if (m instanceof StorageMinecart) {
-			minecart = new MinecartManiaStorageCart(m, ownerName);
+			minecart = new MMStorageCart(m, ownerName);
 		}
 		else {
 			minecart = new MMMinecart(m, ownerName);

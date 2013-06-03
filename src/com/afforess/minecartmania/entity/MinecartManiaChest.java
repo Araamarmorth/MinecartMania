@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import com.afforess.minecartmania.MMSign;
+import com.afforess.minecartmania.signs.MMSign;
 import com.afforess.minecartmania.signs.actions.ForceUnlockChestAction;
 import com.afforess.minecartmania.utils.SignUtils;
 
@@ -313,6 +313,7 @@ public class MinecartManiaChest extends MinecartManiaSingleContainer implements 
 		
 			
 		//if we fail, reset the inventory back to previous values
+		com.afforess.minecartmania.debug.Logger.debug("Failed to remove item from MMChest!");
 		getChest().getInventory().setContents(backup);
 		return false;
 	}
