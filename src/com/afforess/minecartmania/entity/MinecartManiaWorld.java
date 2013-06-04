@@ -44,11 +44,6 @@ public class MinecartManiaWorld {
 	private static int counter = 0;
 	private static Lock pruneLock = new ReentrantLock();
 
-
-	public static Set<Integer> replacedIDs = new HashSet<Integer>();
-
-
-
 	/**
 	 * Returns a new MinecartManiaMinecart from storage if it already exists, or creates and stores a new MinecartManiaMinecart object, and returns it
 	 * @param the minecart to wrap
@@ -67,8 +62,7 @@ public class MinecartManiaWorld {
 				if (minecarts.get(id) != null) {
 					return minecarts.get(id);
 				}
-
-				//Special handling because bukkit fails at creating the right type of minecart entity
+				
 				if(replacedIDs.contains(id)){
 					Logger.debug("Duplication requested for " + id);
 					//special case got call for minecart we already replaced, happens when multiple events are queued for the vanilla cart.
@@ -78,20 +72,7 @@ public class MinecartManiaWorld {
 						}
 					}
 					Logger.debug("Minecart " + id + " listed as replaced but no entity found!!");
-				}
-
-
-				CraftMinecart cm = (CraftMinecart)minecart;	
-				EntityMinecart em = (EntityMinecart)cm.getHandle();
-				CraftServer server = (CraftServer)Bukkit.getServer();
-
-				if (em.type == 1) {
-					CraftStorageMinecart csm = new CraftStorageMinecart(server, em); 
-					minecart = (Minecart)csm;
-				}   
-				else if (em.type == 2) {
-					CraftPoweredMinecart csm = new CraftPoweredMinecart(server, em); 
-					minecart = (Minecart)csm;
+					return null;
 				}
 				
 
@@ -632,7 +613,7 @@ public class MinecartManiaWorld {
 
 	public static void LoadChunksAround(Location location, int radius) {
 		World world = location.getWorld();
-
+		
 		int x = location.getBlock().getChunk().getX();
 		int z = location.getBlock().getChunk().getZ();
 

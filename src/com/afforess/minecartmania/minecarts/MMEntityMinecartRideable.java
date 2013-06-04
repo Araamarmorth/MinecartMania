@@ -374,10 +374,12 @@ public class MMEntityMinecartRideable extends net.minecraft.server.v1_5_R3.Entit
 		}	
 
 
-		this.motY -= defaultgravity * GravityPercent / 100;
+		
 
 		//slopes
 		if (this.onRails){
+		
+			this.motY -= defaultgravity ;
 
 			if (slopedata == 2) {
 				this.motX -= DefaultslopeSpeed * slopeSpeedPercent/100;
@@ -411,6 +413,9 @@ public class MMEntityMinecartRideable extends net.minecraft.server.v1_5_R3.Entit
 				this.motX *=  ((1-this.defaultDerailedFriction) * (100-this.derailedFrictioPercent) / 100)  + this.defaultDerailedFriction;
 				this.motZ *=   ((1-this.defaultDerailedFriction) * (100-this.derailedFrictioPercent) / 100)  + this.defaultDerailedFriction;
 			}
+			else {
+				this.motY -= defaultgravity * GravityPercent / 100;
+				}
 		}
 
 
@@ -824,6 +829,11 @@ public class MMEntityMinecartRideable extends net.minecraft.server.v1_5_R3.Entit
 		this.MaxPushSpeedPercent = value;
 	}
 
+
+	@Override
+	public void setGravityPercent(double value) {
+		this.GravityPercent = value;
+	}
 
 	@Override
 	public void setPassengerFriction(double value) {

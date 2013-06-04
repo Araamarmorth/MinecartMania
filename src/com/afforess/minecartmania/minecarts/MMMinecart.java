@@ -60,6 +60,7 @@ public class MMMinecart {
 	protected volatile CompassDirection previousFacingDir = DirectionUtils.CompassDirection.NO_DIRECTION;
 	protected volatile Vector previousLocation;
 
+
 	protected String destination = "";
 
 	public String getDestination() {
@@ -92,7 +93,7 @@ public class MMMinecart {
 	}
 
 	public MMMinecart(Minecart cart) {
-		minecart = replaceCart(cart);
+		minecart = replaceCart(cart); 
 		oldid = cart.getEntityId();
 		initialize();
 		findOwner();
@@ -703,6 +704,7 @@ public class MMMinecart {
 		getHandle().setMagnetic(Settings.DefaultMagneticRail);
 		getHandle().setCollisions(Settings.MinecartCollisions);
 		getHandle().setMaxPushSpeed(Settings.MaxPassengerPushPercent);
+		getHandle().setGravityPercent(Settings.DefaultGravityPercent);
 		MinecartMania.callEvent(new MinecartManiaMinecartCreatedEvent(this));		
 	}
 

@@ -21,9 +21,10 @@ public  class Settings {
 	//physics
 	public static boolean MinecartCollisions;
 	public static boolean DefaultMagneticRail;
+	public static double DefaultGravityPercent;
 	public static double DefaultPassengerFrictionPercent;
 	public static double DefaultEmptyFrictionPercent;
-	public static double defaultJumpHeight;
+	public static double DefaultJumpHeight;
 	public static double DefaultMaxSpeedPercent;
 	public static double MaxAllowedSpeedPercent;
 	public static double DefaultDerailedFrictionPercent;

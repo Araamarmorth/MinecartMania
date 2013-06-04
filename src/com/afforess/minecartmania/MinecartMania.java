@@ -145,7 +145,7 @@ public class MinecartMania extends JavaPlugin {
 		//this will only be used on a /reload, since otherwise no players are online.
 
 		List<MMDataTable> entries = MMDataTable.getAlltCarts();		
-		if (entries !=null){
+		if (entries != null){
 			for (MMDataTable entry : entries){
 				if(getServer().getPlayer(entry.owner) != null) {
 					Player p = getServer().getPlayer(entry.owner);
@@ -161,7 +161,7 @@ public class MinecartMania extends JavaPlugin {
 
 	private void SaveCartsWithRiders(){
 		MinecartManiaWorld.pruneMinecarts();
-		for(MMMinecart minecart :	MinecartManiaWorld.getMinecartManiaMinecartList()){
+		for(MMMinecart minecart : MinecartManiaWorld.getMinecartManiaMinecartList()){
 			MMDataTable data = null;
 			if (minecart.hasPlayerPassenger()){
 				Logger.debug("Saving minecart for " + minecart.getPlayerPassenger().getName());
@@ -194,7 +194,7 @@ public class MinecartMania extends JavaPlugin {
 			}
 		}
 
-		if (f ==null){
+		if (f == null){
 			return;
 		}
 
@@ -427,7 +427,8 @@ public class MinecartMania extends JavaPlugin {
 		Settings.StationParingMode = getConfig().getInt("StationParsingMethod",0);
 		Settings.IntersectionPromptsMode = getConfig().getInt("IntersectionPromptsMethod",0);
 
-		Settings.defaultJumpHeight = getConfig().getInt("DefaultJumpHeight",4);
+		Settings.DefaultGravityPercent = getConfig().getInt("DefaultGravityPercent",100);
+		Settings.DefaultJumpHeight = getConfig().getInt("DefaultJumpHeight",4);
 
 		Settings.RemoveDeadCarts = getConfig().getBoolean("RemoveDeadMinecarts",false); 
 
@@ -454,7 +455,7 @@ public class MinecartMania extends JavaPlugin {
 
 		Settings.StationsUseOldDirections = getConfig().getBoolean("StationsUseOldDirections",false);
 
-		Settings.RailAdjusterTool =  Item.getNearestMatchingItem(getConfig().getString("RailAdjusterTool","270"));
+		Settings.RailAdjusterTool = Item.getNearestMatchingItem(getConfig().getString("RailAdjusterTool","270"));
 
 		com.afforess.minecartmania.config.Settings.StationCommandSaveAfterUse = true;
 

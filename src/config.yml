@@ -83,7 +83,7 @@ MaxPushSpeedPercent: 25
 SlopeSpeedPercent: 100
 
 #The gravity applied to minecarts while flying through the air, as a percentage of normal minecart gravity.
-GravityPercent: 100
+DefaultGravityPercent: 100
 
 #The number of blocks to jump when a minecart is clicked by the rider, or a [jump] action is encountered.
 DefaultJumpHeight: 4

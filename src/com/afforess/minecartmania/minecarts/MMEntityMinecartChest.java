@@ -372,10 +372,10 @@ public class MMEntityMinecartChest extends net.minecraft.server.v1_5_R3.EntityMi
 		}	
 
 
-		this.motY -= defaultgravity * GravityPercent / 100;
-
 		//slopes
 		if (this.onRails){
+			
+			this.motY -= defaultgravity;
 
 			if (slopedata == 2) {
 				this.motX -= DefaultslopeSpeed * slopeSpeedPercent/100;
@@ -398,7 +398,7 @@ public class MMEntityMinecartChest extends net.minecraft.server.v1_5_R3.EntityMi
 				this.motX *= ((1-this.defaultemptyFriction) * (100-this.emptyFrictionPercent) / 100)  + this.defaultemptyFriction;
 				this.motZ *= ((1-this.defaultemptyFriction) * (100-this.emptyFrictionPercent) / 100)  + this.defaultemptyFriction;
 			}
-			else{
+			else {
 				this.motX *= ((1-this.defaultpassengerFriction) * (100-this.passengerFrictionPercent) / 100)  + this.defaultpassengerFriction;
 				this.motZ *= ((1-this.defaultpassengerFriction) * (100-this.passengerFrictionPercent) / 100)  + this.defaultpassengerFriction;
 			}
@@ -408,6 +408,9 @@ public class MMEntityMinecartChest extends net.minecraft.server.v1_5_R3.EntityMi
 			if (this.onGround) {
 				this.motX *=  ((1-this.defaultDerailedFriction) * (100-this.derailedFrictioPercent) / 100)  + this.defaultDerailedFriction;
 				this.motZ *=   ((1-this.defaultDerailedFriction) * (100-this.derailedFrictioPercent) / 100)  + this.defaultDerailedFriction;
+			}
+			else {
+				this.motY -= defaultgravity * GravityPercent / 100;
 			}
 		}
 
@@ -816,6 +819,12 @@ public class MMEntityMinecartChest extends net.minecraft.server.v1_5_R3.EntityMi
 	@Override
 	public void setMaxPushSpeed(double value) {
 		this.MaxPushSpeedPercent = value;
+	}
+
+
+	@Override
+	public void setGravityPercent(double value) {
+		this.GravityPercent = value;
 	}
 
 

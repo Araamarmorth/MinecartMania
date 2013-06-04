@@ -13,6 +13,7 @@ public interface IMMEntity {
 	public void setDerailedFriction(double value);
 	public void setEmptyFriction(double value);
 	public void setMaxPushSpeed(double value);
+	public void setGravityPercent(double value);
 	public void setPassengerFriction(double value);
 	public void setSlopeSpeed(double value);
 	public void setFrozen(boolean value);

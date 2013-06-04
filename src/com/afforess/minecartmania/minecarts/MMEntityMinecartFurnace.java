@@ -366,7 +366,7 @@ public class MMEntityMinecartFurnace extends net.minecraft.server.v1_5_R3.Entity
 			// there is a passenger
 			double	passengerSpeed = this.passenger.motX * this.passenger.motX + this.passenger.motZ * this.passenger.motZ;
 			if (passengerSpeed > .0001D && Math.sqrt(motX*motX + motZ*motZ) < MaxPushSpeedPercent / 100 * .4) {
-				Logger.motion("Passenger push " +this.passenger.motX * 0.2D + " " +  this.passenger.motZ * 0.2D);
+				Logger.motion("Passenger push " + this.passenger.motX * 0.2D + " " + this.passenger.motZ * 0.2D);
 				this.motX += this.passenger.motX * 0.2D;
 				this.motZ += this.passenger.motZ * 0.2D;
 			}
@@ -374,10 +374,10 @@ public class MMEntityMinecartFurnace extends net.minecraft.server.v1_5_R3.Entity
 		}	
 
 
-		this.motY -= defaultgravity * GravityPercent / 100;
-
 		//slopes
 		if (this.onRails){
+			
+			this.motY -= defaultgravity;
 
 			if (slopedata == 2) {
 				this.motX -= DefaultslopeSpeed * slopeSpeedPercent/100;
@@ -410,6 +410,9 @@ public class MMEntityMinecartFurnace extends net.minecraft.server.v1_5_R3.Entity
 			if (this.onGround) {
 				this.motX *=  ((1-this.defaultDerailedFriction) * (100-this.derailedFrictioPercent) / 100)  + this.defaultDerailedFriction;
 				this.motZ *=   ((1-this.defaultDerailedFriction) * (100-this.derailedFrictioPercent) / 100)  + this.defaultDerailedFriction;
+			}
+			else {
+				this.motY -= defaultgravity * GravityPercent / 100;
 			}
 		}
 
@@ -821,6 +824,11 @@ public class MMEntityMinecartFurnace extends net.minecraft.server.v1_5_R3.Entity
 		this.MaxPushSpeedPercent = value;
 	}
 
+
+	@Override
+	public void setGravityPercent(double value) {
+		this.GravityPercent = value;
+	}
 
 	@Override
 	public void setPassengerFriction(double value) {
