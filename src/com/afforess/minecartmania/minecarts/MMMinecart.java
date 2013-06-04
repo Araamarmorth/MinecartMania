@@ -1127,6 +1127,10 @@ public class MMMinecart {
 			data.put(key, value);
 		}
 	}
+		
+	public void setGravityPercent(double percent){
+		getHandle().setGravityPercent(percent);
+	}
 
 	/**
 	 * Frozen carts do not move, but retain their velocty. The do not raise update events.

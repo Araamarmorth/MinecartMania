@@ -1,0 +1,10 @@
+What's new:
+	
+_ 2.1.3 beta: 1
+	Gravity is now implemented
+	GravityPercent must be changed to DefaultGravityPercent in your config.yml
+	"[set gravity:xxx" on a sign where xxx is a percent of normal gravity
+		(positive or negative) change the gravity of the minecart
+	"[set gravity:def" of "[no fly" on a sign reset the gravity to the default for this
+		minecart
+	"[fly" on a sign set the gravity of the minecart to 0

@@ -27,6 +27,7 @@ import com.afforess.minecartmania.signs.actions.MaximumItemAction;
 import com.afforess.minecartmania.signs.actions.MinimumItemAction;
 import com.afforess.minecartmania.signs.actions.PlatformAction;
 import com.afforess.minecartmania.signs.actions.PromptAction;
+import com.afforess.minecartmania.signs.actions.SetGravityPercentAction;
 import com.afforess.minecartmania.signs.actions.SetMaxSpeedAction;
 import com.afforess.minecartmania.signs.actions.SetSpeedAction;
 import com.afforess.minecartmania.signs.actions.SetStationAction;
@@ -86,7 +87,8 @@ public enum ActionList {
 	CollectItemsSign(CollectItemsAction.class),
 	DepositItemsSign(DepositItemsAction.class),
 	TrashItemsSign(TrashItemsAction.class),
-	SmeltItemsSign(SmeltItemsAction.class)
+	SmeltItemsSign(SmeltItemsAction.class),
+	SetGravityPercentSign(SetGravityPercentAction.class)
 	;
 
 	ActionList(final Class<? extends SignAction> action) {

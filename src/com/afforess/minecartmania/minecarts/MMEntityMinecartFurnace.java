@@ -408,6 +408,8 @@ public class MMEntityMinecartFurnace extends net.minecraft.server.v1_5_R3.Entity
 		else {
 			//Don't apply friction if is in the block above a rail, cause i think onground retruns true.
 			if (this.onGround) {
+				this.motY -= defaultgravity;
+				
 				this.motX *=  ((1-this.defaultDerailedFriction) * (100-this.derailedFrictioPercent) / 100)  + this.defaultDerailedFriction;
 				this.motZ *=   ((1-this.defaultDerailedFriction) * (100-this.derailedFrictioPercent) / 100)  + this.defaultDerailedFriction;
 			}

@@ -162,6 +162,7 @@ permissions:
            minecartmania.signs.create.deposititemssign: true
            minecartmania.signs.create.trashitemssign: true
            minecartmania.signs.create.smeltitemssign: true
+           minecartmania.signs.create.setgravitypercent: true
     minecartmania.signs.create.launchplayersign:
         description: Launch Player
         default: true
@@ -305,4 +306,7 @@ permissions:
         default: true
     minecartmania.signs.create.smeltitemssign:
         description: Smelt Items
+        default: true
+    minecartmania.signs.create.setgravitypercentsign:
+        description: Set Gravity Percent 
         default: true
