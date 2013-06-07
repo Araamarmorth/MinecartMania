@@ -1,0 +1,18 @@
+# Build results
+MinecartMania.jar
+Target/
+
+# Usual cache and backups
+*.Cache
+~$*
+
+#OS dependant useless files
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Mac crap
+.DS_Store
